@@ -1,0 +1,3 @@
+protocol SpaceXRocketLaunchInfoInteractorBusinessLogic: AnyObject {
+    
+}

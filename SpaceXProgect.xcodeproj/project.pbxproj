@@ -10,6 +10,8 @@
 		4E8FEA2929C6D2B400029220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FEA2829C6D2B400029220 /* AppDelegate.swift */; };
 		4E8FEA3229C6D2B600029220 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E8FEA3129C6D2B600029220 /* Assets.xcassets */; };
 		4E8FEA3529C6D2B600029220 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E8FEA3329C6D2B600029220 /* LaunchScreen.storyboard */; };
+		4E8FEA4029C6D79700029220 /* SpaceXInformation in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FEA3F29C6D53E00029220 /* SpaceXInformation */; };
+		4E8FEA4329C6D7A800029220 /* SpaceXInformation in Frameworks */ = {isa = PBXBuildFile; productRef = 4E8FEA4229C6D7A800029220 /* SpaceXInformation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,7 @@
 		4E8FEA3129C6D2B600029220 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E8FEA3429C6D2B600029220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E8FEA3629C6D2B600029220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E8FEA3F29C6D53E00029220 /* SpaceXInformation */ = {isa = PBXFileReference; lastKnownFileType = text; path = SpaceXInformation; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E8FEA4329C6D7A800029220 /* SpaceXInformation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +40,7 @@
 			children = (
 				4E8FEA2729C6D2B400029220 /* SpaceXProgect */,
 				4E8FEA2629C6D2B400029220 /* Products */,
+				4E8FEA4129C6D7A800029220 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,6 +55,7 @@
 		4E8FEA2729C6D2B400029220 /* SpaceXProgect */ = {
 			isa = PBXGroup;
 			children = (
+				4E8FEA3E29C6D4F800029220 /* Modules */,
 				4E8FEA3D29C6D46A00029220 /* App */,
 				4E8FEA3C29C6D45400029220 /* SupportingFiles */,
 			);
@@ -74,6 +80,21 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		4E8FEA3E29C6D4F800029220 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4E8FEA3F29C6D53E00029220 /* SpaceXInformation */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4E8FEA4129C6D7A800029220 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,6 +111,9 @@
 			dependencies = (
 			);
 			name = SpaceXProgect;
+			packageProductDependencies = (
+				4E8FEA4229C6D7A800029220 /* SpaceXInformation */,
+			);
 			productName = SpaceXProgect;
 			productReference = 4E8FEA2529C6D2B400029220 /* SpaceXProgect.app */;
 			productType = "com.apple.product-type.application";
@@ -144,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E8FEA4029C6D79700029220 /* SpaceXInformation in Sources */,
 				4E8FEA2929C6D2B400029220 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +379,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E8FEA4229C6D7A800029220 /* SpaceXInformation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SpaceXInformation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E8FEA1D29C6D2B300029220 /* Project object */;
 }
