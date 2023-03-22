@@ -1,7 +1,7 @@
 import UIKit
 
 public protocol CoordinatorSpaceXProtocol {
-    func start()
+    func start() -> UIViewController
 }
 
 public final class CoordinatorSpaceX {
@@ -26,9 +26,16 @@ public final class CoordinatorSpaceX {
 }
 
 extension CoordinatorSpaceX: CoordinatorSpaceXProtocol {
-    public func start() {
-        let viewController = SpaceXRocketLaunchInfoFactory<SpaceXRocketLaunchInfoContext>().build(with: .init())
+    public func start() -> UIViewController {
+        let contentVC = ContentViewController()
+        let bottomSheetVC = BottomSheetViewController()
+        let viewController =  SpaceXRocketLaunchInfoFactory<SpaceXRocketLaunchInfoContext>().build(with: .init(),
+                                                                                                   contetntVC: contentVC,
+                                                                                                   bottomSheetVC: bottomSheetVC,
+                                                                                                   height: UIScreen.main.bounds.height,
+                                                                                                   initialOffset: UIScreen.main.bounds.height / 3)
         navigationController?.setViewControllers([viewController], animated: true)
+        return viewController
     }
     
     
