@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BottomSheetView: UIView {
+class RocketInfoView: UIView {
 
     override init(frame: CGRect = UIScreen.main.bounds) {
         super.init(frame: frame)

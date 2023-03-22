@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ContentView: UIView {
+class BackgroundView: UIView {
     
     lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView(image: Resources.Images.BackgroundImage.rocketImage)
@@ -19,7 +19,7 @@ class ContentView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-private extension ContentView {
+private extension BackgroundView {
     func configureView() {
         addSubview(backgroundImageView)
     }

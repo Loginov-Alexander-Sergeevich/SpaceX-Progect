@@ -6,11 +6,11 @@
 //
 
 import UIKit
-
-class BottomSheetViewController: UIViewController {
+// RocketInfo
+class RocketInfoViewController: UIViewController {
 
     override func loadView() {
-        view = BottomSheetView()
+        view = RocketInfoView()
     }
 
 }

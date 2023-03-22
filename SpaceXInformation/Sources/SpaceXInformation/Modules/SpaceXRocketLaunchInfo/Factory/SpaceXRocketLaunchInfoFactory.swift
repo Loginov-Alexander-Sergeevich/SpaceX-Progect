@@ -14,7 +14,8 @@ struct SpaceXRocketLaunchInfoFactory<SpaceXRocketLaunchInfoContext: SpaceXRocket
                                                                   router: router,
                                                                   contentViewController: contetntVC,
                                                                   bottomSheetViewController: bottomSheetVC,
-                                                                  spaceXRocketLaunchInfoConfiguration: SpaceXRocketLaunchInfoConfiguration(height: height, initialOffset: initialOffset)) 
+                                                                  spaceXRocketLaunchInfoConfiguration: SpaceXRocketLaunchInfoConfiguration(height: height,
+                                                                                                                                           initialOffset: initialOffset))
         
         presenter.viewController = viewController
         router.viewController = viewController

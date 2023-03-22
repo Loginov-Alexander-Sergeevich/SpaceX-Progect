@@ -27,11 +27,11 @@ public final class CoordinatorSpaceX {
 
 extension CoordinatorSpaceX: CoordinatorSpaceXProtocol {
     public func start() -> UIViewController {
-        let contentVC = ContentViewController()
-        let bottomSheetVC = BottomSheetViewController()
+        let backgroundVC = BackgroundViewController()
+        let rocketInfoVC = RocketInfoViewController()
         let viewController =  SpaceXRocketLaunchInfoFactory<SpaceXRocketLaunchInfoContext>().build(with: .init(),
-                                                                                                   contetntVC: contentVC,
-                                                                                                   bottomSheetVC: bottomSheetVC,
+                                                                                                   contetntVC: backgroundVC,
+                                                                                                   bottomSheetVC: rocketInfoVC,
                                                                                                    height: UIScreen.main.bounds.height,
                                                                                                    initialOffset: UIScreen.main.bounds.height / 3)
         navigationController?.setViewControllers([viewController], animated: true)

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ContentViewController: UIViewController {
+class BackgroundViewController: UIViewController {
 
     override func loadView() {
-        view = ContentView()
+        view = BackgroundView()
     }
 
 }
