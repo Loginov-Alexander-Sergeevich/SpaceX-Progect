@@ -10,7 +10,7 @@ import UIKit
 class RocketInfoViewController: UIViewController {
 
     override func loadView() {
-        view = RocketInfoView()
+        view = TestView()
     }
 
 }
