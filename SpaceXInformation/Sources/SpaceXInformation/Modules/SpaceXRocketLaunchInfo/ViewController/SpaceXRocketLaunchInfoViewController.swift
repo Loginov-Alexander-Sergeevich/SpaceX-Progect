@@ -11,6 +11,7 @@ final class SpaceXRocketLaunchInfoViewController<Content: UIViewController, Bott
     private var spaceXRocketLaunchInfoState: SpaceXRocketLaunchInfoState = .initial
     private let spaceXRocketLaunchInfoConfiguration: SpaceXRocketLaunchInfoConfiguration
     private var topConstraint: Constraint?
+    private var cornerRadiusBottomSheet: CGFloat = 30.0
 
     init(interactor: SpaceXRocketLaunchInfoInteractorBusinessLogic,
          router: SpaceXRocketLaunchInfoRouting,
@@ -78,7 +79,7 @@ final class SpaceXRocketLaunchInfoViewController<Content: UIViewController, Bott
                     self.showBottomSheet()
                 }
             } else {
-                if yTranslationMagnitude >= spaceXRocketLaunchInfoConfiguration.height / 2 || velocity.y < 1000 {
+                if yTranslationMagnitude >= spaceXRocketLaunchInfoConfiguration.height / 3 || velocity.y > 10000 {
                     self.showBottomSheet()
                 } else {
                     self.hideBottomSheet()
@@ -105,6 +106,10 @@ private extension SpaceXRocketLaunchInfoViewController {
         view.addSubview(contentViewController.view)
         view.addSubview(bottomSheetViewController.view)
         
+        bottomSheetViewController.view.clipsToBounds = true
+        bottomSheetViewController.view.layer.cornerRadius = 30
+        bottomSheetViewController.view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
         bottomSheetViewController.view.addGestureRecognizer(panGesture)
         
         contentViewController.didMove(toParent: self)
@@ -128,6 +133,7 @@ private extension SpaceXRocketLaunchInfoViewController {
 
         if animated {
             UIView.animate(withDuration: 1, animations: {
+                self.bottomSheetViewController.view.layer.cornerRadius = 0
                 self.view.layoutIfNeeded()
             }, completion: {_ in
                 self.spaceXRocketLaunchInfoState = .full
@@ -140,9 +146,10 @@ private extension SpaceXRocketLaunchInfoViewController {
 
     func hideBottomSheet(animated: Bool = true) {
         topConstraint?.update(offset: -spaceXRocketLaunchInfoConfiguration.initialOffset)
-
+        
         if animated {
             UIView.animate(withDuration: 1, animations: {
+                self.bottomSheetViewController.view.layer.cornerRadius = 30
                 self.view.layoutIfNeeded()
             }, completion: { _ in
                 self.spaceXRocketLaunchInfoState = .initial
