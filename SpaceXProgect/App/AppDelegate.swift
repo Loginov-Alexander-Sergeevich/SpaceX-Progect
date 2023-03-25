@@ -20,13 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigationController = UINavigationController()
         coordinator = CoordinatorSpaceX(navigationController: navigationController)
-        let vc = coordinator?.start()
+        coordinator?.start()
        
-        
-        self.window?.rootViewController = vc
+        self.window?.rootViewController = navigationController
         return true
     }
-
-
 }
 
