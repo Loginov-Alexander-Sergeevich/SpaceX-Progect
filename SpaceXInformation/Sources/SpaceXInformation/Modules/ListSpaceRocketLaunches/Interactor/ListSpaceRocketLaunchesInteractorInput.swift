@@ -1,0 +1,1 @@
+protocol ListSpaceRocketLaunchesInterectorInput: AnyObject {}

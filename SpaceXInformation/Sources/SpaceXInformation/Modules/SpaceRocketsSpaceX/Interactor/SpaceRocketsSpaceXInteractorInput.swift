@@ -1,0 +1,3 @@
+protocol SpaceRocketsSpaceXInteractorInput: AnyObject {
+    
+}

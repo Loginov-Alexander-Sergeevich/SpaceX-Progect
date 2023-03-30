@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 
 protocol StorageSettingsLogic {
-    func save(_ settings: [SettingSpaceXSetupScreen])
-    func get() -> Result<[SettingSpaceXSetupScreen], StorageError>
+    func save(_ settings: [Setting])
+    func get() -> [Setting]
 }
 
 final class StorageSettings {
@@ -24,21 +24,16 @@ final class StorageSettings {
 
 extension StorageSettings: StorageSettingsLogic {
     
-    func save(_ settings: [SettingSpaceXSetupScreen]) {
+    func save(_ settings: [Setting]) {
         guard let data = try? jsonEncoder.encode(settings) else { return }
         
         userDefaults.set(data, forKey: Key.settings)
     }
     
-    func get() -> Result<[SettingSpaceXSetupScreen], StorageError>  {
+    func get() -> [Setting] {
+        guard let data = userDefaults.data(forKey: Key.settings),
+              let settings = try? jsonDecoder.decode([Setting].self, from: data) else { return []}
+        return settings
         
-        guard let data = userDefaults.data(forKey: Key.settings) else { return .success([]) }
-        
-        do {
-            let settings = try jsonDecoder.decode([SettingSpaceXSetupScreen].self, from: data)
-            return .success(settings)
-        } catch {
-            return .failure(.invalidData)
-        }
     }
 }

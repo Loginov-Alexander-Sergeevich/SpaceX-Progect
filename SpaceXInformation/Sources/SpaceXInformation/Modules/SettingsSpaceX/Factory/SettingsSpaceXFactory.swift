@@ -1,11 +1,14 @@
-struct SettingsSpaceXFactory<SettingsSpaceXContext: SettingsSpaceXDataContext> {
+struct SettingsSpaceXFactory {
     
-    func build(with context: SettingsSpaceXContext) -> SettingsSpaceXViewController {
-        let presenter = SettingsSpaceXPresenter()
-        let interactor = SettingsSpaceXInteractor(presenter: presenter)
-        let router = SettingsSpaceXRouter()
-        let viewController = SettingsSpaceXViewController(interactor: interactor, router: router)
+    func build() -> SettingsSpaceXViewController {
         
+        let storage = StorageSettings()
+        let router = SettingsSpaceXRouter()
+        let interactor = SettingsSpaceXInteractor()
+        let presenter = SettingsSpaceXPresenter(interactor: interactor, router: router, storage: storage)
+        let viewController = SettingsSpaceXViewController(presenter: presenter)
+        
+        interactor.presenter = presenter
         presenter.viewController = viewController
         router.viweController = viewController
         

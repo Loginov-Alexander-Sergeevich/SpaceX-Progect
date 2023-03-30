@@ -27,16 +27,12 @@ public final class CoordinatorSpaceX {
 
 extension CoordinatorSpaceX: CoordinatorSpaceXProtocol {
     public func start() {
-        //let backgroundVC = BackgroundViewController()
-        //let rocketInfoVC = RocketInfoViewController()
-//        let viewController = SpaceXRocketLaunchInfoFactory<SpaceXRocketLaunchInfoContext>().build(with: .init(),
-//                                                                                                   contetntVC: backgroundVC,
-//                                                                                                   bottomSheetVC: rocketInfoVC,
-//                                                                                                   height: UIScreen.main.bounds.height,
-//                                                                                                   initialOffset: UIScreen.main.bounds.height / 3)
-        //let settingsSpaceXFactory = SettingsSpaceXFactory<SettingsSpaceXContext>().build(with: .init())
-        let rocketPageSpaceXFactory = RocketPageSpaceXFactory<RocketPageSpaceXContext>().build(with: .init())
-        navigationController?.setViewControllers([rocketPageSpaceXFactory], animated: true)
+
+        //let listSpaceRocketLaunchesFuctory = ListSpaceRocketLaunchesFuctory().build(navigationAction: navigationAction)
+        let spaceRocketsSpaceXFactory = SpaceRocketsSpaceXFactory().build(navigationAction: navigationAction)
+        //let settingsSpaceXFactory = SettingsSpaceXFactory().build()
+        //let rocketPageSpaceXFactory = RocketPageSpaceXFactory<RocketPageSpaceXContext>().build(with: .init())
+        navigationController?.setViewControllers([spaceRocketsSpaceXFactory], animated: true)
     }
     
     
