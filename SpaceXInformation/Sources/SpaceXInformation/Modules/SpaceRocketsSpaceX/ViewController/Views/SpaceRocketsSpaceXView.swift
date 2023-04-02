@@ -3,7 +3,7 @@ import SnapKit
 
 final class SpaceRocketsSpaceXView: UIView {
     
-    private lazy var dataSource = makeDataSource()
+    private lazy var dataSource1 = makeDataSource()
     
     lazy var spaceRocketsSpaceXCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
@@ -41,22 +41,41 @@ private extension SpaceRocketsSpaceXView {
         }
     }
     
-    func makeDataSource() -> UICollectionViewDiffableDataSource<RocketSectionType, RocketItem> {
+    func makeDataSource() -> UICollectionViewDiffableDataSource<SpaceRocketsSpaceXSection, RocketItem> {
         .init(collectionView: spaceRocketsSpaceXCollectionView) { collectionView, indexPath, item in
             
             switch item {
             case .header(image: _, title: _):
-                break
+                let cell = collectionView.dequeueCell(cellType: UICollectionViewCell.self, for: indexPath)
+                return cell
             case .info(title: _, value: _, uuid: _):
-                break
+                let cell = collectionView.dequeueCell(cellType: UICollectionViewCell.self, for: indexPath)
+                return cell
             case .button:
-                break
+                let cell = collectionView.dequeueCell(cellType: SpaceRocketsButtonCollectionViewCell.self, for: indexPath)
+                cell.backgroundColor = .green
+                cell.tappedOpenLaunches = {
+                    print("Tapped tappedOpenLaunches")
+                }
+                return cell
             }
-            return UICollectionViewCell()
         }
     }
     
+    func aplySnapshote(_ sections: [SpaceRocketsSpaceXSection]) {
+        var snapshote = NSDiffableDataSourceSnapshot<SpaceRocketsSpaceXSection, RocketItem>()
+        for section in sections {
+            snapshote.appendSections([section])
+            snapshote.appendItems(section.items, toSection: section)
+        }
+        dataSource1.apply(snapshote)
+    }
+    
     func configureView() {
+        aplySnapshote([
+            .init(type: .button, items: [.button])
+        ])
+        spaceRocketsSpaceXCollectionView.dataSource = dataSource1
         addSubview(spaceRocketsSpaceXCollectionView)
     }
     
