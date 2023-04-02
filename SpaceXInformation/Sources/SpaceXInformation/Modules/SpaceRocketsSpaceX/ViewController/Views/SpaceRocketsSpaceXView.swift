@@ -1,9 +1,14 @@
 import UIKit
 import SnapKit
 
+protocol SpaceRocketsSpaceXViewDelegate: AnyObject {
+    func tapOpenLaunches()
+}
+
 final class SpaceRocketsSpaceXView: UIView {
     
     private lazy var dataSource1 = makeDataSource()
+    weak var delegat: SpaceRocketsSpaceXViewDelegate?
     
     lazy var spaceRocketsSpaceXCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
@@ -12,9 +17,9 @@ final class SpaceRocketsSpaceXView: UIView {
         return view
     }()
     
-    override init(frame: CGRect = UIScreen.main.bounds) {
+    init(frame: CGRect = UIScreen.main.bounds, delegat: SpaceRocketsSpaceXViewDelegate) {
+        self.delegat = delegat
         super.init(frame: frame)
-        
         configureView()
         configureConstraints()
     }
@@ -54,8 +59,9 @@ private extension SpaceRocketsSpaceXView {
             case .button:
                 let cell = collectionView.dequeueCell(cellType: SpaceRocketsButtonCollectionViewCell.self, for: indexPath)
                 cell.backgroundColor = .green
-                cell.tappedOpenLaunches = {
+                cell.tappedOpenLaunches = { [weak self] in
                     print("Tapped tappedOpenLaunches")
+                    self?.delegat?.tapOpenLaunches()
                 }
                 return cell
             }

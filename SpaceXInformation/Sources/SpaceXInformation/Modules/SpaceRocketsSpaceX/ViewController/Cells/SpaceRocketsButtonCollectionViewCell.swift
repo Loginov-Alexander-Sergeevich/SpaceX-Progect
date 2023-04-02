@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class SpaceRocketsButtonCollectionViewCell: UICollectionViewCell {
+final class SpaceRocketsButtonCollectionViewCell: UICollectionViewCell {
     
     var tappedOpenLaunches: (() -> ())?
     

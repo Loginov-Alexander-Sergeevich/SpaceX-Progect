@@ -2,22 +2,20 @@ import UIKit
 
 final class RocketPageSpaceXViewController: UIPageViewController {
 
-    private let interactor: RocketPageSpaceXBusinessLogic
-    private let router: RocketPageSpaceXRoutingLogic
-    private var countVC: [UIViewController] = []
+    let presenter: RocketPageSpaceXViewControllerOutput
+    var myPageViewControllers: [UIViewController] = []
     
-    init(interactor: RocketPageSpaceXBusinessLogic, router: RocketPageSpaceXRoutingLogic) {
-        self.interactor = interactor
-        self.router = router
+    init(presenter: RocketPageSpaceXViewControllerOutput) {
+        self.presenter = presenter
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        interactor.getVC()
+        presenter.setPages()
+        setViewControllers([myPageViewControllers[0]], direction: .forward, animated: true)
     }
-    
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
@@ -30,38 +28,33 @@ private extension RocketPageSpaceXViewController {
     }
 }
 
-// MARK: - RocketPageSpaceXVCLogic
-extension RocketPageSpaceXViewController: RocketPageSpaceXVCLogic {
-    func viewControllersArray(_ vcArray: [UIViewController]){
-        countVC = vcArray
-        setViewControllers([vcArray[0]], direction: .forward, animated: true)
-    }
-}
-
 // MARK: - UIPageViewControllerDataSource
 extension RocketPageSpaceXViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
-        guard let index = countVC.firstIndex(of: viewController) else { return nil }
+        guard let index = myPageViewControllers.firstIndex(of: viewController) else { return nil }
         
-        return index == 0 ? countVC.last : countVC[index - 1]
+        return index == 0 ? myPageViewControllers.last : myPageViewControllers[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = countVC.firstIndex(of: viewController) else { return nil }
+        guard let index = myPageViewControllers.firstIndex(of: viewController) else { return nil }
 
-        if viewController == countVC.last {
-            return countVC.first
+        if viewController == myPageViewControllers.last {
+            return myPageViewControllers.first
         } else {
-            return countVC[index + 1]
+            return myPageViewControllers[index + 1]
         }
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        countVC.count
+        myPageViewControllers.count
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         0
     }
 }
+
+// MARK: - RocketPageSpaceXVCLogic
+extension RocketPageSpaceXViewController: RocketPageSpaceXViewControllerInput {}

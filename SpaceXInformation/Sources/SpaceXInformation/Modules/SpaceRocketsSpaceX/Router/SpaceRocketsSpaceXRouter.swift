@@ -9,4 +9,9 @@ final class SpaceRocketsSpaceXRouter {
     }
 }
 
-extension SpaceRocketsSpaceXRouter: SpaceRocketsSpaceXRoutingLogic {}
+extension SpaceRocketsSpaceXRouter: SpaceRocketsSpaceXRoutingLogic {
+    func openListSpaceRocketLaunches() {
+        let test = ListSpaceRocketLaunchesFuctory().build(navigationAction: navigationAction)
+        navigationAction(.present(test, true))
+    }
+}

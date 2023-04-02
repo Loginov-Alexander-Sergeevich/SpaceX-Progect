@@ -2,39 +2,35 @@ import UIKit
 
 final class RocketPageSpaceXInteractor {
     
-    private let presenter: RocketPageSpaceXPresentationLogic
-    var vcArray: [UIViewController] = []
+    weak var presenter: RocketPageSpaceXInteractorOutput?
+    let spaceXNetworkService: SpaceXNetworkServiceProtocol
     
-    init(presenter: RocketPageSpaceXPresentationLogic) {
-        self.presenter = presenter
-        
-        vcArray = [
-            {
-                let vc = UIViewController()
-                vc.view.backgroundColor = .brown
-                return vc
-            }(),
-            {
-                let vc = UIViewController()
-                vc.view.backgroundColor = .red
-                return vc
-            }(),
-            {
-                let vc = UIViewController()
-                vc.view.backgroundColor = .blue
-                return vc
-            }(),
-            {
-                let vc = UIViewController()
-                vc.view.backgroundColor = .gray
-                return vc
-            }()
-        ]
+    init(spaceXNetworkService: SpaceXNetworkServiceProtocol) {
+        self.spaceXNetworkService = spaceXNetworkService
     }
+
 }
 
-extension RocketPageSpaceXInteractor: RocketPageSpaceXBusinessLogic {
-    func getVC() {
-        presenter.arrayVC(vcArray)
+extension RocketPageSpaceXInteractor: RocketPageSpaceXInteractorInput {
+    func getDataRocket() {
+        spaceXNetworkService.getRockets { result in
+            switch result {
+            case let .success(rocket):
+                self.presenter?.getResult(rocket)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getDataLaunches() {
+        spaceXNetworkService.getRocketLaunches { result in
+            switch result {
+            case let .success(launch):
+                self.presenter?.getResultLaunch(launch)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

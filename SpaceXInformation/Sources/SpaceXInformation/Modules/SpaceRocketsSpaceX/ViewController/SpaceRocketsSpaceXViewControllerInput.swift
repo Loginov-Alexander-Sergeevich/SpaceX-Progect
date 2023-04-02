@@ -1,3 +1,1 @@
-protocol SpaceRocketsSpaceXViewControllerInput: AnyObject {
-    
-}
+protocol SpaceRocketsSpaceXViewControllerInput: AnyObject {}

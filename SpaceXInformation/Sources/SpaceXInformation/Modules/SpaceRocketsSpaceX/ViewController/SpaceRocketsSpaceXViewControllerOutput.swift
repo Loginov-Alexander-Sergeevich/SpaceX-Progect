@@ -1,1 +1,3 @@
-protocol SpaceRocketsSpaceXViewControllerOutput: AnyObject {}
+protocol SpaceRocketsSpaceXViewControllerOutput: AnyObject {
+    func viewDidLoad()
+}

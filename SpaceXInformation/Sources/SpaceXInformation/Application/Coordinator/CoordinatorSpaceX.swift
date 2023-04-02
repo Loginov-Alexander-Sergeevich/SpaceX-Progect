@@ -31,8 +31,8 @@ extension CoordinatorSpaceX: CoordinatorSpaceXProtocol {
         //let listSpaceRocketLaunchesFuctory = ListSpaceRocketLaunchesFuctory().build(navigationAction: navigationAction)
         let spaceRocketsSpaceXFactory = SpaceRocketsSpaceXFactory().build(navigationAction: navigationAction)
         //let settingsSpaceXFactory = SettingsSpaceXFactory().build()
-        //let rocketPageSpaceXFactory = RocketPageSpaceXFactory<RocketPageSpaceXContext>().build(with: .init())
-        navigationController?.setViewControllers([spaceRocketsSpaceXFactory], animated: true)
+        let rocketPageSpaceXFactory = RocketPageSpaceXFactory().buildt(navigationAction: navigationAction)
+        navigationController?.setViewControllers([rocketPageSpaceXFactory], animated: true)
     }
     
     

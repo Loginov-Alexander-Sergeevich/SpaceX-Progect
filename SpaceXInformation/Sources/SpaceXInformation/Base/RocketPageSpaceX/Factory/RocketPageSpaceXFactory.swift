@@ -1,15 +1,16 @@
-struct RocketPageSpaceXFactory<RocketPageSpaceXContext: RocketPageSpaceXDataContext> {
+struct RocketPageSpaceXFactory {
     
-    func build(with context: RocketPageSpaceXContext) -> RocketPageSpaceXViewController {
+    func buildt(navigationAction: @escaping (NavidationAction) -> Void) -> RocketPageSpaceXViewController {
         
-        let presenter = RocketPageSpaceXPresenter()
-        let interactor = RocketPageSpaceXInteractor(presenter: presenter)
-        let router = RocketPageSpaceXRouter()
-        let rocketPageSpaceXViewController = RocketPageSpaceXViewController(interactor: interactor, router: router)
+        let spaceXNetworkService = SpaceXNetworkService()
+        let interactor = RocketPageSpaceXInteractor(spaceXNetworkService: spaceXNetworkService)
+        let router = RocketPageSpaceXRouter(navigationAction: navigationAction)
+        let presenter = RocketPageSpaceXPresenter(interactor: interactor, router: router)
+        let rocketPageSpaceXViewController = RocketPageSpaceXViewController(presenter: presenter)
         
         presenter.viewController = rocketPageSpaceXViewController
-        router.viewCintroller = rocketPageSpaceXViewController
-        
+        interactor.presenter = presenter
+
         return rocketPageSpaceXViewController
     }
 }

@@ -2,7 +2,18 @@ import UIKit
 
 final class RocketPageSpaceXRouter {
     
-    weak var viewCintroller: UIViewController?
+    private var navigationAction: (NavidationAction) -> Void
+    weak var presenter: RocketPageSpaceXViewControllerOutput?
+    
+    init(navigationAction: @escaping (NavidationAction) -> Void) {
+        self.navigationAction = navigationAction
+    }
 }
 
-extension RocketPageSpaceXRouter: RocketPageSpaceXRoutingLogic {}
+extension RocketPageSpaceXRouter: RocketPageSpaceXRoutingLogic {
+
+    func buildSpaceRocketsSpaceX() -> UIViewController {
+        let trst = SpaceRocketsSpaceXFactory().build(navigationAction: navigationAction)
+        return trst
+    }
+}
