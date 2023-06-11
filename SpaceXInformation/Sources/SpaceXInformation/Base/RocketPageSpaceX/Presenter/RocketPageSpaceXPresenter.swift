@@ -9,16 +9,21 @@ final class RocketPageSpaceXPresenter {
     var launches: [RocketLaunchesModel]?
     
     init(interactor: RocketPageSpaceXInteractorInput, router: RocketPageSpaceXRouter) {
+        
         self.interactor = interactor
-        self.router = router
         interactor.getDataRocket()
+        self.router = router
     }
 }
 
 extension RocketPageSpaceXPresenter: RocketPageSpaceXViewControllerOutput {
-    func setPages() {
+    func viewDidLoad() {
+        setPages()
+    }
+    
+    private func setPages() {
         guard let rockets = rockets?.count else { return }
-        for serialNumber in 0..<rockets {
+        for _ in 0..<rockets {
             let viewController1 = router.buildSpaceRocketsSpaceX()
             viewController?.myPageViewControllers.append(viewController1)
         }

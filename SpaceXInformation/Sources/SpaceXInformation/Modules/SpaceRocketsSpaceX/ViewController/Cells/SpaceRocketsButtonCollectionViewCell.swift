@@ -7,7 +7,9 @@ final class SpaceRocketsButtonCollectionViewCell: UICollectionViewCell {
     
     lazy var openLaunchesButton: UIButton = {
         let button = UIButton(type: .system)
-        
+        button.backgroundColor = UIColor(hexString: "#212121")
+        button.setTitle("Посмотреть запуски", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(openLaunchesAction), for: .touchUpInside)
         return button
     }()

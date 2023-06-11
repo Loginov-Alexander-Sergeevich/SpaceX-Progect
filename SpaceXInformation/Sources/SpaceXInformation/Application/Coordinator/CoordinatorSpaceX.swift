@@ -32,7 +32,7 @@ extension CoordinatorSpaceX: CoordinatorSpaceXProtocol {
         let spaceRocketsSpaceXFactory = SpaceRocketsSpaceXFactory().build(navigationAction: navigationAction)
         //let settingsSpaceXFactory = SettingsSpaceXFactory().build()
         let rocketPageSpaceXFactory = RocketPageSpaceXFactory().buildt(navigationAction: navigationAction)
-        navigationController?.setViewControllers([rocketPageSpaceXFactory], animated: true)
+        navigationAction(.setRoot(rocketPageSpaceXFactory, true))
     }
     
     

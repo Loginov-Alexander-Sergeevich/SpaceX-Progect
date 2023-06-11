@@ -13,7 +13,7 @@ final class RocketPageSpaceXViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        presenter.setPages()
+        presenter.viewDidLoad()
         setViewControllers([myPageViewControllers[0]], direction: .forward, animated: true)
     }
     

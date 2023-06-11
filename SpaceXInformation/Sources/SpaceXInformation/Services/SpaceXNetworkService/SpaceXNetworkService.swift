@@ -1,4 +1,5 @@
 import Foundation
+import SystemConfiguration
 
 protocol SpaceXNetworkServiceProtocol {
     func getRockets(completion: @escaping (Result<[SpaceRocketModel], SpaceXError>) -> ())
@@ -13,12 +14,36 @@ final class SpaceXNetworkService {
         self.urlSession = urlSession
         self.jsonDecoder = jsonDecoder
     }
+    
+    private func isInternetAvailable() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        guard let reachability = withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else {
+            return false
+        }
+        
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(reachability, &flags) {
+            return false
+        }
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        
+        return (isReachable && !needsConnection)
+    }
 }
 
 extension SpaceXNetworkService: SpaceXNetworkServiceProtocol {
     
     func getRockets(completion: @escaping (Result<[SpaceRocketModel], SpaceXError>) -> ()) {
-        
+        guard isInternetAvailable() else { fatalError() }
         guard let urlRocket = URL(string: SpaceXAPI.rocket) else { completion(.failure(.invalidUrl)); return }
         
         urlSession.dataTask(with: urlRocket) { [jsonDecoder] data, response, error in
@@ -50,3 +75,4 @@ extension SpaceXNetworkService: SpaceXNetworkServiceProtocol {
         }.resume()
     }
 }
+

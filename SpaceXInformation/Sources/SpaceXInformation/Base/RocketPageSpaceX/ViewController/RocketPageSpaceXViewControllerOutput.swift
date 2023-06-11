@@ -1,5 +1,3 @@
-import UIKit
-
 protocol RocketPageSpaceXViewControllerOutput: AnyObject {
-    func setPages()
+    func viewDidLoad()
 }

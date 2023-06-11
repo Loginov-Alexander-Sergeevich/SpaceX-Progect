@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  SpaceXProgect
-//
-//  Created by Александр Александров on 19.03.2023.
-//
-
 import UIKit
 import SpaceXInformation
 

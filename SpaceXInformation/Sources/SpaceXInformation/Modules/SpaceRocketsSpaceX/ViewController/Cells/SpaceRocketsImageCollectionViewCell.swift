@@ -6,7 +6,7 @@ final class SpaceRocketsImageCollectionViewCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView(image: Resources.Images.BackgroundImage.rocketImage)
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
